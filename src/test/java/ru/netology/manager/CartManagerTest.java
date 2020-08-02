@@ -37,7 +37,7 @@ class CartManagerTest {
         manager.add(third);
 
         PurchaseItem[] actual = manager.getAll();
-        PurchaseItem[] expected = new PurchaseItem[]{third, second, first, third, second, first};
+        PurchaseItem[] expected = new PurchaseItem[]{third, second, first, third, second};
 
         assertArrayEquals(expected, actual);
     }
