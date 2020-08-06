@@ -30,14 +30,8 @@ public class AfishaManager {
     }
 
     public Movies[] getAll() {
-        Movies[] result = new Movies[afisha.length];
 
-        for (int i = 0; i < result.length; i++) {
-            int index = afisha.length - 1 - i;
-            result[i] = afisha[index];
-        }
-
-        return result;
+      return afisha;
     }
 
     public Movies[] showFilms() {
