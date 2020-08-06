@@ -2,20 +2,24 @@ package ru.netology.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.netology.domain.PurchaseItem;
-import ru.netology.manager.CartManager;
+import ru.netology.domain.Movies;
+import ru.netology.manager.AfishaManager;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PurchaseRepositoryTest {
+class MoviesRepositoryTest {
 
-    private PurchaseRepository repository = new PurchaseRepository();
-    private PurchaseItem first = new PurchaseItem(1, 01, "first", 11, 1);
-    private PurchaseItem second = new PurchaseItem(2, 02, "second", 11, 1);
-    private PurchaseItem third = new PurchaseItem(3, 03, "third", 11, 1);
+    private MoviesRepository repository = new MoviesRepository();
+    private Movies first = new Movies(1, 01, "URL//1", "Бладшот", "боевик", false);
+    private Movies second = new Movies(2, 02, "URL//2", "Вперёд", "мультфильм", false);
+    private Movies third = new Movies(3, 03, "URL//3", "Отель Белград", "комедия", false);
+    private Movies fourth = new Movies(4, 04, "URL//4", "Джентельмены", "боевик", false);
+    private Movies fifth = new Movies(5, 05, "URL//5", "Человек-невидимка", "ужасы", false);
+    private Movies sixth = new Movies(6, 06, "URL//6", "Тролли.Мировой тур", "мультфильм", true);
+    private Movies seventh = new Movies(7, 07, "URL//7", "Номер один", "комедия", true);
 
     @BeforeEach
-public void SetUp(){
+    public void setUp() {
         repository.save(first);
         repository.save(second);
         repository.save(third);
@@ -25,12 +29,7 @@ public void SetUp(){
     public void shouldFind() {
         int idToFind = 2;
 
-        repository.findById(idToFind);
-
-        PurchaseItem[] actual = repository.findAll();
-        PurchaseItem[] expected = new PurchaseItem[]{second};
-
-        assertArrayEquals(expected, actual);
+      assertEquals(repository.findById(idToFind) , second);
     }
 
     @Test
@@ -40,8 +39,8 @@ public void SetUp(){
 
         repository.removeById(idToRemove);
 
-        PurchaseItem[] actual = repository.findAll();
-        PurchaseItem[] expected = new PurchaseItem[]{second, first};
+        Movies[] actual = repository.findAll();
+        Movies[] expected = new Movies[]{second, first};
 
         assertArrayEquals(expected, actual);
     }
@@ -53,8 +52,8 @@ public void SetUp(){
 
         repository.removeById(idToRemove);
 
-        PurchaseItem[] actual = repository.findAll();
-        PurchaseItem[] expected = new PurchaseItem[]{first, second, third};
+        Movies[] actual = repository.findAll();
+        Movies[] expected = new Movies[]{first, second, third};
 
         assertArrayEquals(expected, actual);
     }
@@ -63,8 +62,8 @@ public void SetUp(){
 
     public void shouldDeleteAll(){
         repository.removeAll();
-        PurchaseItem[] actual = repository.findAll();
-        PurchaseItem[] expected = new PurchaseItem[0];
+        Movies[] actual = repository.findAll();
+        Movies[] expected = new Movies[0];
 
         assertArrayEquals(expected, actual);
 
