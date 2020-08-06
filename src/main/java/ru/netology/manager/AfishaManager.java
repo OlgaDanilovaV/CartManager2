@@ -2,6 +2,7 @@ package ru.netology.manager;
 import ru.netology.domain.Movies;
 
 public class AfishaManager {
+
     private Movies[] afisha = new Movies[0];
 
     public void add(Movies film) {
@@ -37,6 +38,5 @@ public class AfishaManager {
         }
         return lastFilms;
     }
-
 
 }
