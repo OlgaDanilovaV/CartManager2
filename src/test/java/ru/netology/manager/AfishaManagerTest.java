@@ -2,12 +2,26 @@ package ru.netology.manager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import ru.netology.domain.Movies;
+import ru.netology.repository.MoviesRepository;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.mockito.Mockito.doReturn;
+
+
+@ExtendWith(MockitoExtension.class)
 
 class AfishaManagerTest {
-    private AfishaManager manager = new AfishaManager();
+
+    @Mock
+    MoviesRepository repository;
+
+    @InjectMocks
+    private AfishaManager manager;
     private Movies first = new Movies(1, 01, "URL//1", "Бладшот", "боевик", false);
     private Movies second = new Movies(2, 02, "URL//2", "Вперёд", "мультфильм", false);
     private Movies third = new Movies(3, 03, "URL//3", "Отель Белград", "комедия", false);
@@ -31,6 +45,8 @@ class AfishaManagerTest {
         manager.add(sixth);
         manager.add(seventh);
         manager.add(first);
+        Movies[] returned = new Movies[]{first, seventh, sixth, fifth, fourth, third, second, first};
+        doReturn(returned).when(repository).findAll();
 
 
         Movies[] actual = manager.showFilms();
@@ -47,6 +63,8 @@ class AfishaManagerTest {
         manager.add(second);
         manager.add(third);
         manager.add(fourth);
+        Movies[] returned = new Movies[]{third,second,first, seventh, sixth, fifth, fourth, third, second, first};
+        doReturn(returned).when(repository).findAll();
 
         Movies[] actual = manager.showFilms();
         Movies[] expected = new Movies[]{third,second,first, seventh, sixth, fifth, fourth, third, second, first};
@@ -61,6 +79,8 @@ class AfishaManagerTest {
         manager.add(sixth);
         manager.add(seventh);
         manager.setUserRequestCount(15);
+        Movies[] returned = new Movies[]{seventh, sixth, fifth, fourth, third, second, first};
+        doReturn(returned).when(repository).findAll();
 
 
         Movies[] actual = manager.showFilms();
@@ -71,6 +91,8 @@ class AfishaManagerTest {
 @Test
     void shouldShowLessFilms(){
         manager.setUserRequestCount(4);
+    Movies[] returned = new Movies[]{fifth, fourth, third, second};
+    doReturn(returned).when(repository).findAll();
 
     Movies[] actual = manager.showFilms();
     Movies[] expected = new Movies[]{fifth, fourth, third, second};
@@ -82,6 +104,8 @@ class AfishaManagerTest {
     @Test
     void shouldShowNullFilms(){
         manager.setUserRequestCount(0);
+        Movies[] returned = new Movies[0];
+        doReturn(returned).when(repository).findAll();
 
         Movies[] actual = manager.showFilms();
         Movies[] expected = new Movies[0];
