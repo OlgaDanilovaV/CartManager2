@@ -6,16 +6,21 @@ import ru.netology.domain.Movies;
 
 
 @Data
-@NoArgsConstructor
+
 public class AfishaManager {
 
     private int defaultPoster = 10;
     private Movies[] afisha = new Movies[0];
     private  int userRequestCount;
 
+    public AfishaManager()    {
+        this.userRequestCount = defaultPoster;
+    }
+
     public AfishaManager(int userRequestCount) {
         this.userRequestCount = userRequestCount;
     }
+
 
     public void add(Movies film) {
         int length = afisha.length + 1;

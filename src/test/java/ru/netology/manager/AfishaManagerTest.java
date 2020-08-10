@@ -60,8 +60,8 @@ class AfishaManagerTest {
     void shouldShowRequestCountOver() {
         manager.add(sixth);
         manager.add(seventh);
-        manager.setUserRequestCount(15);
-
+        AfishaManager tmp = new AfishaManager(3);
+//        manager.setUserRequestCount(3);
 
         Movies[] actual = manager.showFilms();
         Movies[] expected = new Movies[]{seventh, sixth, fifth, fourth, third, second, first};
@@ -70,7 +70,8 @@ class AfishaManagerTest {
     }
 @Test
     void shouldShowLessFilms(){
-        manager.setUserRequestCount(4);
+//        AfishaManager number = new AfishaManager(4);
+manager.setUserRequestCount(4);
 
     Movies[] actual = manager.showFilms();
     Movies[] expected = new Movies[]{fifth, fourth, third, second};
@@ -90,5 +91,15 @@ class AfishaManagerTest {
 
     }
 
+    @Test
+    void shouldShowBelowFilms() {
 
+        manager.setUserRequestCount(-1);
+
+        Movies[] actual = manager.showFilms();
+        Movies[] expected = new Movies[]{fifth, fourth, third, second};
+
+        assertArrayEquals(expected, actual);
+
+    }
 }
