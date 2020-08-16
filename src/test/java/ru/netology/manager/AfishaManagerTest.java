@@ -39,6 +39,7 @@ class AfishaManagerTest {
         assertArrayEquals(expected, actual);
 
     }
+
     @Test
     void shouldAddAndShowDefaultWhenOverDefault() {
         manager.add(sixth);
@@ -49,7 +50,7 @@ class AfishaManagerTest {
         manager.add(fourth);
 
         Movies[] actual = manager.showFilms();
-        Movies[] expected = new Movies[]{third,second,first, seventh, sixth, fifth, fourth, third, second, first};
+        Movies[] expected = new Movies[]{fourth, third, second, first, seventh, sixth, fifth, fourth, third, second};
 
         assertArrayEquals(expected, actual);
 
@@ -58,30 +59,32 @@ class AfishaManagerTest {
 
     @Test
     void shouldShowRequestCountOver() {
+        AfishaManager manager = new AfishaManager(3);
         manager.add(sixth);
         manager.add(seventh);
-        AfishaManager tmp = new AfishaManager(3);
-//        manager.setUserRequestCount(3);
+        manager.add(first);
+
 
         Movies[] actual = manager.showFilms();
-        Movies[] expected = new Movies[]{seventh, sixth, fifth, fourth, third, second, first};
+        Movies[] expected = new Movies[]{first, seventh, sixth};
 
         assertArrayEquals(expected, actual);
     }
-@Test
-    void shouldShowLessFilms(){
-//        AfishaManager number = new AfishaManager(4);
-manager.setUserRequestCount(4);
-
-    Movies[] actual = manager.showFilms();
-    Movies[] expected = new Movies[]{fifth, fourth, third, second};
-
-    assertArrayEquals(expected, actual);
-
-}
 
     @Test
-    void shouldShowNullFilms(){
+    void shouldShowLessFilms() {
+        AfishaManager manager = new AfishaManager(4);
+        //manager.setUserRequestCount(4);
+
+        Movies[] actual = manager.showFilms();
+        Movies[] expected = new Movies[]{fifth, fourth, third, second};
+
+        assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+    void shouldShowNullFilms() {
         manager.setUserRequestCount(0);
 
         Movies[] actual = manager.showFilms();
@@ -93,13 +96,22 @@ manager.setUserRequestCount(4);
 
     @Test
     void shouldShowBelowFilms() {
-
-        manager.setUserRequestCount(-1);
+        AfishaManager manager = new AfishaManager(-1);
+        manager.add(first);
+        manager.add(second);
+        manager.add(third);
+        manager.add(fourth);
+        manager.add(fifth);
+        manager.add(seventh);
+        manager.add(sixth);
+        manager.add(first);
+        manager.add(second);
+        manager.add(third);
+        manager.add(fourth);
 
         Movies[] actual = manager.showFilms();
-        Movies[] expected = new Movies[]{fifth, fourth, third, second};
+        Movies[] expected = new Movies[]{fourth, third, second, first, sixth, seventh, fifth, fourth, third, second};
 
         assertArrayEquals(expected, actual);
-
     }
 }

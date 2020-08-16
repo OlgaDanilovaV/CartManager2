@@ -18,6 +18,9 @@ public class AfishaManager {
     }
 
     public AfishaManager(int userRequestCount) {
+        if (userRequestCount < 0) {
+            userRequestCount = defaultPoster;
+        }
         this.userRequestCount = userRequestCount;
     }
 
@@ -44,9 +47,7 @@ public class AfishaManager {
 
         int movieCount = afisha.length;
 
-        if (userRequestCount < 0) {
-            movieCount = defaultPoster;
-        }
+
         if (userRequestCount < movieCount) {
             movieCount = userRequestCount;
         }
